@@ -1,5 +1,5 @@
 date = {
-    day: 17,
+    day: 3,
     month: 02,
     year: 2061
 }
@@ -54,9 +54,9 @@ function checkPalindromeForAllDateFormats(date) {
     var mmddyy = dateStr.month + dateStr.day + dateStr.year.slice(-2);
     var yymmdd = dateStr.year.slice(-2) + dateStr.month + dateStr.day;
     var flag = false;
-    console.log( ddmmyyyy);
-        console.log( mmddyyyy);
-    console.log( yyyymmdd);console.log(ddmmyy);console.log( mmddyy);console.log(yymmdd);
+    // console.log( ddmmyyyy);
+    //     console.log( mmddyyyy);
+    // console.log( yyyymmdd);console.log(ddmmyy);console.log( mmddyy);console.log(yymmdd);
     var allCombArray = [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd];
     for (var i = 0; i < allCombArray.length; i++) {
         if (isPalindrome(allCombArray[i])) {
@@ -165,20 +165,87 @@ function getNextPalindromeDate(date){
   if(checkPalindromeForAllDateFormats(date)!==true){
     while(1){
       ctr++;
+      // console.log(ctr);
       var isPalindrome = checkPalindromeForAllDateFormats(nextDate);
+      
       if(isPalindrome){
         break;
       }
       nextDate = getNextDate(nextDate);
     }
-}
+  }
     return [ctr, nextDate];
   }
-console.log(getNextPalindromeDate(date));
+
+function getPeviousPalindromeDate(date){
+    var ctr = 0;
+    var previousDate = getPreviousDate(date);
+    if(checkPalindromeForAllDateFormats(date)!==true){
+    while(1){
+      ctr++;
+      // console.log(ctr);
+      var isPalindrome = checkPalindromeForAllDateFormats(previousDate);
+      
+      if(isPalindrome){
+        break;
+      }
+      previousDate = getPreviousDate(previousDate);
+    }
+    }
+     return [ctr,previousDate];
+     }
+
+function showNearOrFar(date){
+  var future=getNextPalindromeDate(date);
+  var past=getPeviousPalindromeDate(date);
+  if(future[0]<past[0]){
+    return future;
+  }
+  else{
+    return past;
+  }
+}
+// console.log(getPeviousPalindromeDate(date));
+
+var dateInputRef = document.querySelector('#bday-input');
+var showBtnRef = document.querySelector('#show-btn');
+var resultRef = document.querySelector('#result');
+
+function clickHandler(e){
+  var bdayStr = dateInputRef.value; 
+  
+  if(bdayStr !== ''){
+    var listOfDate = bdayStr.split('-'); 
+
+    var date = {
+      day: Number(listOfDate[2]),
+      month: Number(listOfDate[1]),
+      year: Number(listOfDate[0])
+    };
+    
+    var isPalindrome = checkPalindromeForAllDateFormats(date);
+
+    if(isPalindrome){
+       resultRef.innerText = 'Yay!🎉 your birthday is a palindrome!! 🥳✨';
+    }
+    else {
+      var [ctr, nextDate] = showNearOrFar(date);
+
+      resultRef.innerText = `The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${ctr} days! 😔`;
+    }
+  }
+}
+
+showBtnRef.addEventListener('click', clickHandler);
+
+
+
+// console.log(getNextPalindromeDate(date));
 // console.log(previousPalindromeDate(date));
 // console.log(convertDateToStr(date));
 // console.log(ddmmyyyy);
 //     console.log( mmddyyyy);
 //     console.log( yyyymmdd);console.log(ddmmyy);console.log( mmddyy);console.log(yymmdd);
+
 
 

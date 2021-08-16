@@ -1,0 +1,49 @@
+*{
+    font-family: 'Crimson Text', serif;
+  }
+  body {
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    height: 100vh;
+    color: black;
+    background-color: rgb(253, 249, 194);
+    
+  }
+  
+  main {
+    border: 1px solid white;
+    text-align: center;
+    height: 100%;
+  }
+  
+  
+  
+  label{
+  font-size: x-large;
+      font-weight: bold;
+      color: red;
+  }
+  .setmargin{
+    margin:1rem;
+  }
+  #show-btn{
+        font-size: large;
+      color: white;
+      background-color: black;
+      border-radius: 5px;
+  }
+  #result{
+  margin: auto;
+  text-align: center;
+  border: 2px solid #F9A826;
+  border-radius: 5px;
+  background-color: #F9D28C;
+  font-size: large;
+  margin: 0rem 19rem;
+  }
+  #main-container{
+    background-color: #FDE2A6;
+  }
+  
+  
